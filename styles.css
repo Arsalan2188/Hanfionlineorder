@@ -36,7 +36,7 @@ h1 {
 
 .product p {
     font-size: 1em;
-    color: #e74c3c; /* Red for prices */
+    color: #0222d8; /* Red for prices */
     font-weight: bold;
 }
 
@@ -78,7 +78,7 @@ h1 {
     font-size: 1.1em;
     margin: 15px 0 10px;
     font-weight: bold;
-    color: #e74c3c;
+    color: #13bb13;
 }
 
 .cart button {
@@ -127,7 +127,7 @@ h1 {
     #products-row1, #products-row2, #products-row3, #products-row4 {
         display: block; /* Change from flex to block */
         margin-bottom: 20px;
-    }
+    }   
 
     .product {
         width: 100%; /* Full width on mobile */
@@ -182,5 +182,60 @@ h1 {
 
     .cart-item button {
         padding: 5px; /* Smaller Remove button */
+    }
+}
+/* Add these styles at the bottom of styles.css */
+.floating-cart {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    z-index: 100; /* Stays above other content */
+}
+
+.floating-cart.hidden {
+    display: none; /* Hidden when cart is empty */
+}
+
+#view-cart-btn {
+    background-color: #3498db; /* Blue like Place Order */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%; /* Circular button */
+    cursor: pointer;
+    font-size: 1.2em;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#cart-count {
+    background-color: #e74c3c; /* Red badge */
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
+    margin-right: 5px;
+}
+
+/* Mobile adjustment */
+@media (max-width: 768px) {
+    #view-cart-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1em;
+    }
+    #cart-count {
+        width: 18px;
+        height: 18px;
+        font-size: 0.8em;
     }
 }
