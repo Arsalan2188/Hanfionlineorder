@@ -16,9 +16,16 @@
     <div class="cart">
         <h2>Cart</h2>
         <ul id="cart-items"></ul>
-        <p>Total: $<span id="cart-total">0</span></p>
+        <p>Total: ₹<span id="cart-total">0</span></p>
         <button onclick="submitOrder()">Place Order</button>
-        
+<div class="nav">
+    <button id="see-cart-btn"></button>
+</div>
+<div class="nav">
+<div id="floating-cart" class="floating-cart hidden">
+    <span id="cart-count">0</span>
+    <button id="view-cart-btn">🛒</button>
+</div>
     </div>
     <script src="script.js"></script>
 </body>

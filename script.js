@@ -1,10 +1,10 @@
 const products = [
     // Row 1 (5 products)
-    { id: 1, name: "Rice (1kg)", price: 5 },
-    { id: 2, name: "Spices (100g)", price: 2 },
-    { id: 3, name: "Oil (1L)", price: 3 },
-    { id: 4, name: "Salt (500g)", price: 1 },
-    { id: 5, name: "Sugar (1kg)", price: 4 },
+    { id: 1, name: "Haldi (100g)", price: 25 },
+    { id: 2, name: "Zeera (100g)", price: 50 },
+    { id: 3, name: "Dhaniya (100g)", price: 15 },
+    { id: 4, name: "Red Chili (100g)", price: 36 },
+    { id: 5, name: "Golki (100g)", price: 100 },
     // Row 2 (5 products)
     { id: 6, name: "Turmeric (100g)", price: 1.5 },
     { id: 7, name: "Flour (1kg)", price: 3 },
@@ -40,7 +40,7 @@ function displayProducts() {
         div.className = "product";
         div.innerHTML = `
             <h3>${products[i].name}</h3>
-            <p>$${products[i].price}</p>
+            <p>₹${products[i].price}</p>
             <button onclick="addToCart(${products[i].id})">Buy</button>
         `;
         row1.appendChild(div);
@@ -52,7 +52,7 @@ function displayProducts() {
         div.className = "product";
         div.innerHTML = `
             <h3>${products[i].name}</h3>
-            <p>$${products[i].price}</p>
+            <p>₹${products[i].price}</p>
             <button onclick="addToCart(${products[i].id})">Buy</button>
         `;
         row2.appendChild(div);
@@ -63,7 +63,7 @@ function displayProducts() {
         div.className = "product";
         div.innerHTML = `
             <h3>${products[i].name}</h3>
-            <p>$${products[i].price}</p>
+            <p>₹${products[i].price}</p>
             <button onclick="addToCart(${products[i].id})">Buy</button>
         `;
         row3.appendChild(div);
@@ -74,7 +74,7 @@ function displayProducts() {
             div.className = "product";
             div.innerHTML = `
                 <h3>${products[i].name}</h3>
-                <p>$${products[i].price}</p>
+                <p>₹${products[i].price}</p>
                 <button onclick="addToCart(${products[i].id})">Buy</button>
             `;
             row4.appendChild(div);
@@ -97,7 +97,7 @@ function updateCart() {
 
     cart.forEach(item => {
         const li = document.createElement("li");
-        li.textContent = `${item.name} - $${item.price}`;
+        li.textContent = `${item.name} - ₹${item.price}`;
         cartList.appendChild(li);
         total += item.price;
     });
@@ -127,7 +127,7 @@ function updateCart() {
         const li = document.createElement("li");
         li.className = "cart-item";
         li.innerHTML = `
-            ${item.name} - $${item.price}
+            ${item.name} - ₹${item.price}
             <button onclick="removeFromCart(${index})">Remove</button>
         `;
         cartList.appendChild(li);
@@ -147,9 +147,9 @@ function submitOrder() {
         // Create the order message
         let orderMessage = "New Order:\n";
         cart.forEach(item => {
-            orderMessage += `${item.name} - $${item.price}\n`;
+            orderMessage += `${item.name} - ₹${item.price}\n`;
         });
-        orderMessage += `Total: $${cart.reduce((sum, item) => sum + item.price, 0)}`;
+        orderMessage += `Total: ₹${cart.reduce((sum, item) => sum + item.price, 0)}`;
 
         // WhatsApp number (India country code +91)
         const whatsappNumber = "919330533302"; // Your number with +91 prefix
@@ -163,5 +163,42 @@ function submitOrder() {
         updateCart();
     }
 }
+document.getElementById("see-cart-btn").addEventListener("click", () => {
+    document.querySelector(".cart").scrollIntoView({ behavior: "smooth" });
+});
+// Replace the existing updateCart() function
+function updateCart() {
+    const cartList = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    const floatingCart = document.getElementById("floating-cart");
+    const cartCount = document.getElementById("cart-count");
+    cartList.innerHTML = "";
+    let total = 0;
+
+    cart.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.className = "cart-item";
+        li.innerHTML = `
+            ${item.name} - ₹${item.price}
+            <button onclick="removeFromCart(${index})">Remove</button>
+        `;
+        cartList.appendChild(li);
+        total += item.price;
+    });
+    cartTotal.textContent = total;
+
+    // Show/hide floating cart icon and update count
+    if (cart.length > 0) {
+        floatingCart.classList.remove("hidden");
+        cartCount.textContent = cart.length;
+    } else {
+        floatingCart.classList.add("hidden");
+    }
+}
+
+// Add this at the bottom of script.js
+document.getElementById("view-cart-btn").addEventListener("click", () => {
+    document.querySelector(".cart").scrollIntoView({ behavior: "smooth" });
+});
 
 displayProducts();
